@@ -1,0 +1,29 @@
+{
+  "name": "klapuch/uri",
+  "type": "library",
+  "description": "Normalized, united, checked and beauty uri",
+  "keywords": [
+    "url",
+    "urn",
+    "uri"
+  ],
+  "homepage": "https://github.com/klapuch/Uri",
+  "authors": [
+    {
+      "name": "Dominik Klapuch",
+      "homepage": "http://www.facedown.cz",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+
+  },
+  "require-dev": {
+    "nette/tester": "^1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Klapuch\\Uri\\": "Core/"
+    }
+  }
+}
