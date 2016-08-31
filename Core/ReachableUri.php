@@ -5,7 +5,7 @@ namespace Klapuch\Uri;
 /*
  * URI which is always reachable
  */
-final class AccessibleUri implements Uri {
+final class ReachableUri implements Uri {
     const NOT_FOUND = 404;
     private $origin;
 

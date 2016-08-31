@@ -11,7 +11,7 @@ use Tester;
 
 require __DIR__ . '/../bootstrap.php';
 
-final class AccessibleUri extends Tester\TestCase {
+final class ReachableUri extends Tester\TestCase {
     protected function existingUris() {
         return [
             ['http://www.example.com'], // http
@@ -26,7 +26,7 @@ final class AccessibleUri extends Tester\TestCase {
     public function testExistingUris($uri) {
         Assert::same(
             $uri,
-            (new Uri\AccessibleUri(new Uri\FakeUri($uri)))->reference()
+            (new Uri\ReachableUri(new Uri\FakeUri($uri)))->reference()
         );
     }
 
@@ -41,10 +41,10 @@ final class AccessibleUri extends Tester\TestCase {
      */
     public function testUnknownUris($uri) {
         Assert::exception(function() use($uri) {
-            (new Uri\AccessibleUri(new Uri\FakeUri($uri)))->reference();
+            (new Uri\ReachableUri(new Uri\FakeUri($uri)))->reference();
         }, \InvalidArgumentException::class, "The given URI \"$uri\" does not exist");
     }
 
 }
 
-(new AccessibleUri())->run();
+(new ReachableUri())->run();
