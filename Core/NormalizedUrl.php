@@ -7,14 +7,21 @@ namespace Klapuch\Uri;
  * Normalized URL by RFC 3986
  */
 final class NormalizedUrl implements Uri {
-    private $url;
+    private $origin;
 
-    public function __construct(string $url) {
-        $this->url = $url;
+    public function __construct(Uri $origin) {
+        $this->origin = $origin;
     }
 
     public function reference(): string {
-        $parsedUrl = parse_url(strtolower(trim($this->url, '/')));
+        $parsedUrl = parse_url(
+            strtolower(
+                trim(
+                    $this->origin->reference(),
+                    '/'
+                )
+            )
+        );
         $scheme = isset($parsedUrl['scheme']) ? $parsedUrl['scheme'] . '://' : '';
         $host = $parsedUrl['host'] ?? '';
         $path = $parsedUrl['path'] ?? '';

@@ -29,7 +29,10 @@ final class ProtocolBasedUrl extends Tester\TestCase {
     public function testProtocolBasedUrlWithoutError($url) {
         Assert::same(
             $url,
-            (new Uri\ProtocolBasedUrl($url, ['http', 'https', '']))->reference()
+            (new Uri\ProtocolBasedUrl(
+                new Uri\FakeUri($url),
+                ['http', 'https', '']
+            ))->reference()
         );
     }
 
@@ -46,14 +49,20 @@ final class ProtocolBasedUrl extends Tester\TestCase {
     public function testNonProtocolBasedUrlsWithError($url) {
         Assert::exception(
             function() use($url) {
-                (new Uri\ProtocolBasedUrl($url, ['http', 'https']))->reference();
+                (new Uri\ProtocolBasedUrl(
+                    new Uri\FakeUri($url),
+                    ['http', 'https']
+                ))->reference();
             },
             \InvalidArgumentException::class,
             'Protocol of the URL must be one of http, https'
         );
         Assert::exception(
             function() use($url) {
-                (new Uri\ProtocolBasedUrl($url, ['http', 'https', '']))->reference();
+                (new Uri\ProtocolBasedUrl(
+                    new Uri\FakeUri($url),
+                    ['http', 'https', '']
+                ))->reference();
             },
             \InvalidArgumentException::class,
             'Protocol of the URL must be one of http, https or left empty'

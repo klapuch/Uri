@@ -7,20 +7,20 @@ namespace Klapuch\Uri;
  */
 final class AccessibleUri implements Uri {
     const NOT_FOUND = 404;
-    private $uri;
+    private $origin;
 
-    public function __construct(string $uri) {
-        $this->uri = $uri;
+    public function __construct(Uri $origin) {
+        $this->origin = $origin;
     }
 
     public function reference(): string {
-        $headers = @get_headers($this->uri);
+        $headers = @get_headers($this->origin->reference());
         if($headers && strpos($headers[0], self::NOT_FOUND) === false)
-            return $this->uri;
+            return $this->origin->reference();
         throw new \InvalidArgumentException(
             sprintf(
                 'The given URI "%s" does not exist',
-                $this->uri
+                $this->origin->reference()
             )
         );
     }

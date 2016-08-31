@@ -6,18 +6,18 @@ namespace Klapuch\Uri;
  * Valid URL based on the given protocols
  */
 final class ProtocolBasedUrl implements Uri {
-    private $url;
+    private $origin;
     private $protocols;
 
-    public function __construct(string $url, array $protocols) {
-        $this->url = $url;
+    public function __construct(Uri $origin, array $protocols) {
+        $this->origin = $origin;
         $this->protocols = $protocols;
     }
 
     public function reference(): string {
-        $scheme = parse_url($this->url, PHP_URL_SCHEME) ?? '';
+        $scheme = parse_url($this->origin->reference(), PHP_URL_SCHEME) ?? '';
         if(in_array(strtolower($scheme), $this->protocols))
-            return $this->url;
+            return $this->origin->reference();
         throw new \InvalidArgumentException(
             sprintf(
                 'Protocol of the URL must be one of %s',

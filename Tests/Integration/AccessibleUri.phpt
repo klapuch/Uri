@@ -26,7 +26,7 @@ final class AccessibleUri extends Tester\TestCase {
     public function testExistingUris($uri) {
         Assert::same(
             $uri,
-            (new Uri\AccessibleUri($uri))->reference()
+            (new Uri\AccessibleUri(new Uri\FakeUri($uri)))->reference()
         );
     }
 
@@ -41,7 +41,7 @@ final class AccessibleUri extends Tester\TestCase {
      */
     public function testUnknownUris($uri) {
         Assert::exception(function() use($uri) {
-            (new Uri\AccessibleUri($uri))->reference();
+            (new Uri\AccessibleUri(new Uri\FakeUri($uri)))->reference();
         }, \InvalidArgumentException::class, "The given URI \"$uri\" does not exist");
     }
 

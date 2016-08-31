@@ -34,7 +34,7 @@ final class NormalizedUrl extends Tester\TestCase {
     public function testUrls($actual, $expected) {
         Assert::same(
             $expected,
-            (new Uri\NormalizedUrl($actual))->reference()
+            (new Uri\NormalizedUrl(new Uri\FakeUri($actual)))->reference()
         );
     }
 }
