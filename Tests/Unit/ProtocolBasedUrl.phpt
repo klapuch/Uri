@@ -69,7 +69,6 @@ final class ProtocolBasedUrl extends Tester\TestCase {
         );
 
     }
-
 }
 
 (new ProtocolBasedUrl())->run();
