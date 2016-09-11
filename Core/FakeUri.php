@@ -8,7 +8,7 @@ namespace Klapuch\Uri;
 final class FakeUri implements Uri {
     private $uri;
 
-    public function __construct(string $uri) {
+    public function __construct(string $uri = null) {
         $this->uri = $uri;
     }
 
