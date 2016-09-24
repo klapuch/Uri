@@ -3,7 +3,7 @@ declare(strict_types = 1);
 namespace Klapuch\Uri;
 
 /*
- * Valid URL based on the given protocols
+ * Valid URL is based on the given protocols
  */
 final class ProtocolBasedUrl implements Uri {
     private $origin;
@@ -15,8 +15,8 @@ final class ProtocolBasedUrl implements Uri {
     }
 
     public function reference(): string {
-        $scheme = parse_url($this->origin->reference(), PHP_URL_SCHEME) ?? '';
-        if(in_array(strtolower($scheme), $this->protocols))
+        $scheme = parse_url($this->origin->reference(), PHP_URL_SCHEME);
+        if(in_array(strtolower((string)$scheme), $this->protocols))
             return $this->origin->reference();
         throw new \InvalidArgumentException(
             sprintf(
@@ -27,7 +27,7 @@ final class ProtocolBasedUrl implements Uri {
     }
 
     /**
-     * Protocols transferred to human readble phrase
+     * Protocols transferred to human readble form
      * @param array $protocols
      * @return string
      */

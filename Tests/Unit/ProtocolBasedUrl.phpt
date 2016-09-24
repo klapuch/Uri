@@ -20,13 +20,24 @@ final class ProtocolBasedUrl extends Tester\TestCase {
             ['https://google.com'],
             ['www.google.com/'],
             ['google.com/'],
+            ['http://www.google.com:80'],
+            ['http://www.google.com:8080'],
+            ['http://www.google.com:foo'],
+            [''],
+            ['/'],
+            ['localhost'],
+            ['http://localhost'],
+            ['127.0.0.1'],
+            ['124.12.34.22'],
+            ['127.0.0.1:80'],
+            ['http://127.0.0.1:80'],
         ]; 
     }
 
     /**
      * @dataProvider protocolBasedUrls
      */
-    public function testProtocolBasedUrlWithoutError($url) {
+    public function testProtocolBasedUrlWithoutFail($url) {
         Assert::same(
             $url,
             (new Uri\ProtocolBasedUrl(
@@ -39,6 +50,8 @@ final class ProtocolBasedUrl extends Tester\TestCase {
     protected function nonProtocolBasedUrls() {
         return [
             ['ftp://server.com'],
+            ['ftp://localhost'],
+            ['ftp://127.0.0.1'],
             ['httpr://server.com'],
         ]; 
     }
@@ -46,7 +59,7 @@ final class ProtocolBasedUrl extends Tester\TestCase {
     /**
      * @dataProvider nonProtocolBasedUrls
      */
-    public function testNonProtocolBasedUrlsWithError($url) {
+    public function testNonProtocolBasedUrlsWithFail($url) {
         Assert::exception(
             function() use($url) {
                 (new Uri\ProtocolBasedUrl(
@@ -67,7 +80,6 @@ final class ProtocolBasedUrl extends Tester\TestCase {
             \InvalidArgumentException::class,
             'Protocol of the URL must be one of http, https or left empty'
         );
-
     }
 }
 

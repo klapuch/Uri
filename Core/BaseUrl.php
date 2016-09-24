@@ -1,6 +1,9 @@
 <?php
 namespace Klapuch\Uri;
 
+/**
+ * Base URL considered as a root URL for project
+ */
 final class BaseUrl implements Uri {
     const DELIMITER = '/';
     private $scriptUrl;

@@ -4,7 +4,7 @@ namespace Klapuch\Uri;
 
 interface Uri {
     /**
-     * Address or name of the resource pointed by URI
+     * Address or name of the resource pointed by the URI
      * @throws \InvalidArgumentException
      * @return string
      */

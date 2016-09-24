@@ -25,13 +25,19 @@ final class NormalizedUrl extends Tester\TestCase {
             ['www.google.com?query=value', 'www.google.com?query=value'],
             ['www.google.com?query=', 'www.google.com?query='],
             ['www.google.com#hashTag', 'www.google.com'],
+            ['', ''],
+            ['foo', 'foo'],
+            ['123', '123'],
+            ['https://www.google.com:80', 'https://www.google.com'],
+            ['https://www.google.com:foo', ''],
+            ['???', '???'],
         ]; 
     }
 
     /**
      * @dataProvider urls
      */
-    public function testUrls($actual, $expected) {
+    public function testNormalization($actual, $expected) {
         Assert::same(
             $expected,
             (new Uri\NormalizedUrl(new Uri\FakeUri($actual)))->reference()

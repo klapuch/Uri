@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace Klapuch\Uri;
 
-/*
+/**
  * Valid URL
  */
 final class ValidUrl implements Uri {
@@ -13,7 +13,7 @@ final class ValidUrl implements Uri {
     }
 
     public function reference(): string {
-        if(filter_var($this->url, FILTER_VALIDATE_URL))
+        if($this->valid())
             return $this->url;
         throw new \InvalidArgumentException(
             sprintf(
@@ -21,5 +21,13 @@ final class ValidUrl implements Uri {
                 $this->url
             )
         );
+    }
+
+    /**
+     * Is the given url valid?
+     * @return bool
+     */
+    private function valid(): bool {
+        return (bool)filter_var($this->url, FILTER_VALIDATE_URL);
     }
 }
