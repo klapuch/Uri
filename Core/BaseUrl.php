@@ -6,23 +6,33 @@ namespace Klapuch\Uri;
  * Base URL considered as a root URL for project
  */
 final class BaseUrl implements Uri {
-    const DELIMITER = '/';
-    private $script;
+	const DELIMITER = '/';
+	private $script;
 	private $url;
 
-    public function __construct(string $script, string $url) {
-        $this->script = $script;
+	public function __construct(string $script, string $url) {
+		$this->script = $script;
 		$this->url = $url;
-    }
+	}
 
-    public function reference(): string {
-        return implode(
-            self::DELIMITER,
-            $this->withoutExecutedScript(
-                explode(self::DELIMITER, $this->script)
-            )
-        ) . self::DELIMITER;
-    }
+	public function reference(): string {
+		return implode(
+			self::DELIMITER,
+			$this->withoutExecutedScript(
+				explode(self::DELIMITER, $this->script)
+			)
+		) . self::DELIMITER;
+	}
+
+	/**
+	 * Parts of the url without index.php or other file where is script executed
+	 * @param array $parts
+	 * @return array
+	 */
+	private function withoutExecutedScript(array $parts): array {
+		array_pop($parts);
+		return $parts;
+	}
 
 	public function path(): string {
 		$scriptParts = $this->toParts($this->script);
@@ -40,16 +50,6 @@ final class BaseUrl implements Uri {
 			}
 		}
 		return '';
-	}
-
-	/**
-	 * Parts of the url without index.php or other file where is script executed
-	 * @param array $parts
-	 * @return array
-	 */
-	private function withoutExecutedScript(array $parts): array {
-		array_pop($parts);
-		return $parts;
 	}
 
 	/**

@@ -6,29 +6,46 @@
 namespace Klapuch\Uri\Unit;
 
 use Klapuch\Uri;
-use Tester\Assert;
 use Tester;
+use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
 
 final class BaseUrl extends Tester\TestCase {
-    protected function urls() {
-        return [
-            // [scriptUrl expected]
-            ['/foo/www/index.php', '/foo/www/'],
-            ['/foo/index.php', '/foo/'],
-            ['/foo/categories/bar/www/index.php', '/foo/categories/bar/www/'],
-            ['/index.php', '/'],
-            ['/foo/www/index.php', '/foo/www/'],
-            ['/foo/www/index.php', '/foo/www/'],
-            ['', '/'],
-            ['', '/'],
-            ['/', '/'],
-            ['/foo/index.php', '/foo/'],
-            ['index.php', '/'],
-            ['foo/index.php', 'foo/'],
-        ];
-    }
+	/**
+	 * @dataProvider paths
+	 */
+	public function testChoppedPaths($script, $url, $path) {
+		Assert::same($path, (new Uri\BaseUrl($script, $url))->path());
+	}
+
+	/**
+	 * @dataProvider urls
+	 */
+	public function testChoppedUrls($script, $reference) {
+		Assert::same(
+			$reference,
+			(new Uri\BaseUrl($script, 'doesn\'t matter'))->reference()
+		);
+	}
+
+	protected function urls() {
+		return [
+			// [scriptUrl expected]
+			['/foo/www/index.php', '/foo/www/'],
+			['/foo/index.php', '/foo/'],
+			['/foo/categories/bar/www/index.php', '/foo/categories/bar/www/'],
+			['/index.php', '/'],
+			['/foo/www/index.php', '/foo/www/'],
+			['/foo/www/index.php', '/foo/www/'],
+			['', '/'],
+			['', '/'],
+			['/', '/'],
+			['/foo/index.php', '/foo/'],
+			['index.php', '/'],
+			['foo/index.php', 'foo/'],
+		];
+	}
 
 	protected function paths() {
 		return [
@@ -53,23 +70,6 @@ final class BaseUrl extends Tester\TestCase {
 			['/acme/www/index.php', '/acme/www/acme/edit/5', 'acme/edit/5'],
 		];
 	}
-
-	/**
-	 * @dataProvider paths
-	 */
-	public function testChoppedPaths($script, $url, $path) {
-		Assert::same($path, (new Uri\BaseUrl($script, $url))->path());
-	}
-
-    /**
-     * @dataProvider urls
-     */
-    public function testChoppedUrls($script, $reference) {
-        Assert::same(
-            $reference,
-			(new Uri\BaseUrl($script, 'doesn\'t matter'))->reference()
-        );
-    }
 }
 
 (new BaseUrl())->run();

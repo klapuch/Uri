@@ -6,32 +6,32 @@ namespace Klapuch\Uri;
  * Valid URL
  */
 final class ValidUrl implements Uri {
-    private $url;
+	private $url;
 
-    public function __construct(string $url) {
-        $this->url = $url;
-    }
-
-    public function reference(): string {
-        if($this->valid())
-            return $this->url;
-        throw new \InvalidArgumentException(
-            sprintf(
-                'The given URL "%s" is not valid',
-                $this->url
-            )
-        );
-    }
+	public function __construct(string $url) {
+		$this->url = $url;
+	}
 
 	public function path(): string {
 		return rtrim((string)parse_url($this->reference(), PHP_URL_PATH), '/');
-    }
+	}
 
-    /**
-     * Is the given url valid?
-     * @return bool
-     */
-    private function valid(): bool {
-        return (bool)filter_var($this->url, FILTER_VALIDATE_URL);
-    }
+	public function reference(): string {
+		if($this->valid())
+			return $this->url;
+		throw new \InvalidArgumentException(
+			sprintf(
+				'The given URL "%s" is not valid',
+				$this->url
+			)
+		);
+	}
+
+	/**
+	 * Is the given url valid?
+	 * @return bool
+	 */
+	private function valid(): bool {
+		return (bool)filter_var($this->url, FILTER_VALIDATE_URL);
+	}
 }
