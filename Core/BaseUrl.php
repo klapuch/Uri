@@ -18,20 +18,8 @@ final class BaseUrl implements Uri {
 	public function reference(): string {
 		return implode(
 			self::DELIMITER,
-			$this->withoutExecutedScript(
-				explode(self::DELIMITER, $this->script)
-			)
+			$this->withoutExecutedScript($this->toParts($this->script))
 		) . self::DELIMITER;
-	}
-
-	/**
-	 * Parts of the url without index.php or other file where is script executed
-	 * @param array $parts
-	 * @return array
-	 */
-	private function withoutExecutedScript(array $parts): array {
-		array_pop($parts);
-		return $parts;
 	}
 
 	public function path(): string {
@@ -46,6 +34,16 @@ final class BaseUrl implements Uri {
 			}
 		}
 		return '';
+	}
+
+	/**
+	 * Parts of the url without index.php or other file where is script executed
+	 * @param array $parts
+	 * @return array
+	 */
+	private function withoutExecutedScript(array $parts): array {
+		array_pop($parts);
+		return $parts;
 	}
 
 	/**
