@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 namespace Klapuch\Uri;
 
 /**
@@ -22,7 +23,7 @@ final class BaseUrl implements Uri {
     }
 
     /**
-     * Parts of the url without index.php or other file where is scripts executed 
+     * Parts of the url without index.php or other file where is script executed
      * @param array $parts
      * @return array
      */
