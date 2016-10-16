@@ -40,7 +40,7 @@ final class BaseUrl implements Uri {
 		for($i = 0; $i < count($scriptParts); $i++) {
 			if($scriptParts[$i] !== $urlParts[$i]) {
 				return implode(
-					'/',
+					self::DELIMITER,
 					$this->withoutQueries(array_slice($urlParts, $i))
 				);
 			}
@@ -54,7 +54,7 @@ final class BaseUrl implements Uri {
 	 * @return array
 	 */
 	private function toParts(string $url): array {
-		return explode('/', mb_strtolower($url));
+		return explode(self::DELIMITER, mb_strtolower($url));
 	}
 
 	/**
