@@ -62,7 +62,7 @@ final class BaseUrl extends Tester\TestCase {
 			['/čcme/www/index.php', '/Čcme/www/page/view', 'page/view'], // multi byte char
 			['/acme/www/index.php', '/acme/www/page/view/?get=someValue', 'page/view'],
 			['/acme/www/index.php', '/acme/www/page/?get=someValue', 'page'],
-			['/acme/www/index.php', '/acme/www/page/view?get=someValue', 'page'],
+			['/acme/www/index.php', '/acme/www/page/view?get=someValue', 'page/view'],
 			['/acme/www/index.php', '/acme/www/page/view/1/?get=someValue', 'page/view/1'],
 			['index.php', '/page/view/', 'page/view'],
 			['/index.php/', '/page/view/', 'page/view'],

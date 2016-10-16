@@ -41,11 +41,7 @@ final class BaseUrl implements Uri {
 			if($scriptParts[$i] !== $urlParts[$i]) {
 				return implode(
 					'/',
-					$this->withoutQueries(
-						$this->withoutTrailingSlashes(
-							array_slice($urlParts, $i)
-						)
-					)
+					$this->withoutQueries(array_slice($urlParts, $i))
 				);
 			}
 		}
@@ -67,11 +63,12 @@ final class BaseUrl implements Uri {
 	 * @return array
 	 */
 	private function withoutQueries(array $parts): array {
-		return array_filter(
-			$parts,
-			function(string $part): bool {
-				return !preg_match('~[\?]{1}[\S\s]*=[\S\s]*~', $part);
-			}
+		return $this->withoutTrailingSlashes(
+			array_map(function(string $part): string {
+				if(strpos($part, '?') === false)
+					return $part;
+				return substr($part, 0, strpos($part, '?'));
+			}, $parts)
 		);
 	}
 
