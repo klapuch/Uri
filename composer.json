@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-
+    "ext-mbstring": "*"
   },
   "require-dev": {
     "nette/tester": "^1.7"

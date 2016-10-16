@@ -26,7 +26,11 @@ final class ProtocolBasedUrl implements Uri {
         );
     }
 
-    /**
+	public function path(): string {
+		return $this->origin->path();
+	}
+
+	/**
      * Protocols transferred to human readable form
      * @param array $protocols
      * @return string

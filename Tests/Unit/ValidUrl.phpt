@@ -12,7 +12,7 @@ use Tester;
 require __DIR__ . '/../bootstrap.php';
 
 final class ValidUrl extends Tester\TestCase {
-    protected function validUrls() {
+    protected function validReferences() {
         return [
             ['http://www.google.com'],
             ['http://www.google.com:80'],
@@ -24,7 +24,7 @@ final class ValidUrl extends Tester\TestCase {
         ];
     }
 
-    protected function invalidUrls() {
+    protected function invalidReferences() {
         return [
             ['localhost'],
             ['127.0.0.1'],
@@ -35,10 +35,21 @@ final class ValidUrl extends Tester\TestCase {
         ];
     }
 
+    protected function paths() {
+    	return [
+			['http://www.google.com/a/b/c', '/a/b/c'],
+			['http://www.google.com/a/b/c?a=ok', '/a/b/c'],
+			['http://www.google.com/a/b/c/?a=ok', '/a/b/c'],
+			['http://www.google.com', ''],
+			['http://www.google.com/', ''],
+			['http://www.google.com?a=ok', ''],
+		];
+	}
+
     /**
-     * @dataProvider validUrls
+     * @dataProvider validReferences
      */
-    public function testValidUrl($url) {
+    public function testValidReference($url) {
         Assert::same(
             $url,
             (new Uri\ValidUrl($url))->reference()
@@ -46,13 +57,26 @@ final class ValidUrl extends Tester\TestCase {
     }
 
     /**
-     * @dataProvider invalidUrls
+     * @dataProvider invalidReferences
      */
-    public function testInvalidUrlWithFail($url) {
+    public function testInvalidReferenceWithFail($url) {
         Assert::exception(function() use($url) {
             (new Uri\ValidUrl($url))->reference();
         }, \InvalidArgumentException::class, "The given URL \"$url\" is not valid");
     }
+
+	/**
+	 * @dataProvider paths
+	 */
+	public function testPaths($url, $path) {
+		Assert::same($path, (new Uri\ValidUrl($url))->path());
+    }
+
+	public function testInvalidUrlWithoutPath() {
+		Assert::exception(function() {
+			(new Uri\ValidUrl('foo.com/a/b/c'))->path();
+        }, \InvalidArgumentException::class, 'The given URL "foo.com/a/b/c" is not valid');
+	}
 }
 
 (new ValidUrl())->run();

@@ -25,7 +25,11 @@ final class ReachableUrl implements Uri {
         );
     }
 
-    /**
+	public function path(): string {
+		return $this->origin->path();
+	}
+
+	/**
      * Is the URL reachable?
      * @return bool
      */

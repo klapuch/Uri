@@ -23,6 +23,10 @@ final class ValidUrl implements Uri {
         );
     }
 
+	public function path(): string {
+		return rtrim((string)parse_url($this->reference(), PHP_URL_PATH), '/');
+    }
+
     /**
      * Is the given url valid?
      * @return bool

@@ -15,12 +15,7 @@ final class NormalizedUrl implements Uri {
 
     public function reference(): string {
         $parsedUrl = parse_url(
-            strtolower(
-                trim(
-                    $this->origin->reference(),
-                    '/'
-                )
-            )
+            strtolower(trim($this->origin->reference(), '/'))
         );
         $scheme = isset($parsedUrl['scheme']) ? $parsedUrl['scheme'] . '://' : '';
         $host = $parsedUrl['host'] ?? '';
@@ -28,4 +23,8 @@ final class NormalizedUrl implements Uri {
         $query = isset($parsedUrl['query']) ? '?' . $parsedUrl['query'] : '';
         return $scheme . $host . $path . $query;
     }
+
+	public function path(): string {
+		return $this->origin->path();
+	}
 }

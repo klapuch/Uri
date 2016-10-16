@@ -9,4 +9,11 @@ interface Uri {
      * @return string
      */
     public function reference(): string;
+
+	/**
+	 * Path in the URI
+	 * @throws \InvalidArgumentException
+	 * @return string
+	 */
+	public function path(): string;
 }
