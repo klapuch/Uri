@@ -6,19 +6,17 @@ namespace Klapuch\Uri;
  */
 final class BaseUrl implements Uri {
     const DELIMITER = '/';
-    private $scriptUrl;
-    private $realUrl;
+    private $script;
 
-    public function __construct(string $scriptUrl, string $realUrl) {
-        $this->scriptUrl = $scriptUrl;
-        $this->realUrl = $realUrl;
+    public function __construct(string $script) {
+        $this->script = $script;
     }
 
     public function reference(): string {
         return implode(
             self::DELIMITER,
             $this->withoutExecutedScript(
-                explode(self::DELIMITER, $this->scriptUrl)
+                explode(self::DELIMITER, $this->script)
             )
         ) . self::DELIMITER;
     }
