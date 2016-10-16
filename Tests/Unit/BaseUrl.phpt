@@ -31,7 +31,7 @@ final class BaseUrl extends Tester\TestCase {
 
 	protected function urls() {
 		return [
-			// [scriptUrl expected]
+			// [scriptUrl, expected]
 			['/foo/www/index.php', '/foo/www/'],
 			['/foo/index.php', '/foo/'],
 			['/Foo/index.php', '/Foo/'],
