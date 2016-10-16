@@ -27,7 +27,7 @@ final class ProtocolBasedUrl implements Uri {
     }
 
     /**
-     * Protocols transferred to human readble form
+     * Protocols transferred to human readable form
      * @param array $protocols
      * @return string
      */
