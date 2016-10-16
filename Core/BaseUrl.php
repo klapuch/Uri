@@ -18,7 +18,9 @@ final class BaseUrl implements Uri {
 	public function reference(): string {
 		return implode(
 			self::DELIMITER,
-			$this->withoutExecutedScript($this->toParts($this->script))
+			$this->withoutExecutedScript(
+				explode(self::DELIMITER, $this->script)
+			)
 		) . self::DELIMITER;
 	}
 

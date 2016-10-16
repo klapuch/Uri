@@ -34,6 +34,7 @@ final class BaseUrl extends Tester\TestCase {
 			// [scriptUrl expected]
 			['/foo/www/index.php', '/foo/www/'],
 			['/foo/index.php', '/foo/'],
+			['/Foo/index.php', '/Foo/'],
 			['/foo/categories/bar/www/index.php', '/foo/categories/bar/www/'],
 			['/index.php', '/'],
 			['/foo/www/index.php', '/foo/www/'],
