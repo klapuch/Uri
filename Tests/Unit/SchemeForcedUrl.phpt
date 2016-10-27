@@ -11,14 +11,14 @@ use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
 
-final class SchemeBasedUrl extends Tester\TestCase {
+final class SchemeForcedUrl extends Tester\TestCase {
 	/**
 	 * @dataProvider schemeBasedUrls
 	 */
 	public function testSchemeBasedUrlWithoutFail($url) {
 		Assert::same(
 			$url,
-			(new Uri\SchemeBasedUrl(
+			(new Uri\SchemeForcedUrl(
 				new Uri\FakeUri($url),
 				['http', 'https', '']
 			))->reference()
@@ -31,7 +31,7 @@ final class SchemeBasedUrl extends Tester\TestCase {
 	public function testNonSchemeBasedUrlsWithFail($url) {
 		Assert::exception(
 			function() use ($url) {
-				(new Uri\SchemeBasedUrl(
+				(new Uri\SchemeForcedUrl(
 					new Uri\FakeUri($url),
 					['http', 'https']
 				))->reference();
@@ -41,7 +41,7 @@ final class SchemeBasedUrl extends Tester\TestCase {
 		);
 		Assert::exception(
 			function() use ($url) {
-				(new Uri\SchemeBasedUrl(
+				(new Uri\SchemeForcedUrl(
 					new Uri\FakeUri($url),
 					['http', 'https', '']
 				))->reference();
@@ -83,4 +83,4 @@ final class SchemeBasedUrl extends Tester\TestCase {
 	}
 }
 
-(new SchemeBasedUrl())->run();
+(new SchemeForcedUrl())->run();

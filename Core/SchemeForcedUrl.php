@@ -5,7 +5,7 @@ namespace Klapuch\Uri;
 /**
  * Valid URL is based on the given schemes
  */
-final class SchemeBasedUrl implements Uri {
+final class SchemeForcedUrl implements Uri {
 	private $origin;
 	private $schemes;
 
