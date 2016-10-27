@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace Klapuch\Uri;
 
-/*
+/**
  * URL which is always reachable
  */
 final class ReachableUrl implements Uri {

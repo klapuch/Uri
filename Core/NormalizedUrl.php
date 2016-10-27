@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace Klapuch\Uri;
 
-/*
+/**
  * TODO
  * Normalized URL by RFC 3986
  */

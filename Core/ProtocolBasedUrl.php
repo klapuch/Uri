@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace Klapuch\Uri;
 
-/*
+/**
  * Valid URL is based on the given protocols
  */
 final class ProtocolBasedUrl implements Uri {
