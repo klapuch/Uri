@@ -21,6 +21,8 @@ final class HostUrl extends Tester\TestCase {
 			['http://www.google.com?a=b', 'www.google.com'],
 			['http://www.google.com#hash', 'www.google.com'],
 			['http://google.com', 'google.com'],
+			['http://mail.google.com', 'mail.google.com'],
+			['http://www.mail.google.com', 'www.mail.google.com'],
 		];
 	}
 
