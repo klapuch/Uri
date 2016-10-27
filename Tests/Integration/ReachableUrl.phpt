@@ -39,6 +39,7 @@ final class ReachableUrl extends Tester\TestCase {
 		return [
 			['http://www.example.com'], // http
 			['https://www.google.com'], // https
+			['http://www.google.com'], // http => https
 			['https://www.nette.org'], // redirect with 301
 		];
 	}
