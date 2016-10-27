@@ -45,6 +45,7 @@ final class ReachableUrl extends Tester\TestCase {
 
 	protected function unknownUrls() {
 		return [
+			['www.example.com'], // no protocol
 			['http://www.foobar.foobar'],
 			['ftp://ftp.mirror.nl/'],
 		];

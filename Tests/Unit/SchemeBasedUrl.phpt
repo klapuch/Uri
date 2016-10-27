@@ -11,14 +11,14 @@ use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
 
-final class ProtocolBasedUrl extends Tester\TestCase {
+final class SchemeBasedUrl extends Tester\TestCase {
 	/**
-	 * @dataProvider protocolBasedUrls
+	 * @dataProvider schemeBasedUrls
 	 */
-	public function testProtocolBasedUrlWithoutFail($url) {
+	public function testSchemeBasedUrlWithoutFail($url) {
 		Assert::same(
 			$url,
-			(new Uri\ProtocolBasedUrl(
+			(new Uri\SchemeBasedUrl(
 				new Uri\FakeUri($url),
 				['http', 'https', '']
 			))->reference()
@@ -26,32 +26,32 @@ final class ProtocolBasedUrl extends Tester\TestCase {
 	}
 
 	/**
-	 * @dataProvider nonProtocolBasedUrls
+	 * @dataProvider nonSchemeBasedUrls
 	 */
-	public function testNonProtocolBasedUrlsWithFail($url) {
+	public function testNonSchemeBasedUrlsWithFail($url) {
 		Assert::exception(
 			function() use ($url) {
-				(new Uri\ProtocolBasedUrl(
+				(new Uri\SchemeBasedUrl(
 					new Uri\FakeUri($url),
 					['http', 'https']
 				))->reference();
 			},
 			\InvalidArgumentException::class,
-			'Protocol of the URL must be one of http, https'
+			'Scheme of the URL must be one of http, https'
 		);
 		Assert::exception(
 			function() use ($url) {
-				(new Uri\ProtocolBasedUrl(
+				(new Uri\SchemeBasedUrl(
 					new Uri\FakeUri($url),
 					['http', 'https', '']
 				))->reference();
 			},
 			\InvalidArgumentException::class,
-			'Protocol of the URL must be one of http, https or left empty'
+			'Scheme of the URL must be one of http, https or left empty'
 		);
 	}
 
-	protected function protocolBasedUrls() {
+	protected function schemeBasedUrls() {
 		return [
 			['http://www.google.com'],
 			['https://www.google.com'],
@@ -73,7 +73,7 @@ final class ProtocolBasedUrl extends Tester\TestCase {
 		];
 	}
 
-	protected function nonProtocolBasedUrls() {
+	protected function nonSchemeBasedUrls() {
 		return [
 			['ftp://server.com'],
 			['ftp://localhost'],
@@ -83,4 +83,4 @@ final class ProtocolBasedUrl extends Tester\TestCase {
 	}
 }
 
-(new ProtocolBasedUrl())->run();
+(new SchemeBasedUrl())->run();

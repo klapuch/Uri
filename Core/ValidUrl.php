@@ -20,10 +20,7 @@ final class ValidUrl implements Uri {
 		if($this->valid())
 			return $this->url;
 		throw new \InvalidArgumentException(
-			sprintf(
-				'The given URL "%s" is not valid',
-				$this->url
-			)
+			sprintf('The given URL "%s" is not valid', $this->url)
 		);
 	}
 

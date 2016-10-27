@@ -16,10 +16,7 @@ final class ValidUrl extends Tester\TestCase {
 	 * @dataProvider validReferences
 	 */
 	public function testValidReference($url) {
-		Assert::same(
-			$url,
-			(new Uri\ValidUrl($url))->reference()
-		);
+		Assert::same($url, (new Uri\ValidUrl($url))->reference());
 	}
 
 	/**
@@ -55,6 +52,7 @@ final class ValidUrl extends Tester\TestCase {
 	protected function validReferences() {
 		return [
 			['http://www.google.com'],
+			['http://www.google.com/'],
 			['http://www.google.com:80'],
 			['http://www.google.com:8080'],
 			['https://www.google.com'],

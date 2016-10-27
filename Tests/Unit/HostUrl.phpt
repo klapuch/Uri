@@ -12,6 +12,16 @@ use Tester\Assert;
 require __DIR__ . '/../bootstrap.php';
 
 final class HostUrl extends Tester\TestCase {
+	/**
+	 * @dataProvider hosts
+	 */
+	public function testHosts($current, $expected) {
+		Assert::same(
+			$expected,
+			(new Uri\HostUrl(new Uri\FakeUri($current)))->reference()
+		);
+	}
+
 	protected function hosts() {
 		// [current, expected]
 		return [
@@ -24,16 +34,6 @@ final class HostUrl extends Tester\TestCase {
 			['http://mail.google.com', 'mail.google.com'],
 			['http://www.mail.google.com', 'www.mail.google.com'],
 		];
-	}
-
-	/**
-	 * @dataProvider hosts
-	 */
-	public function testHosts($current, $expected) {
-		Assert::same(
-			$expected,
-			(new Uri\HostUrl(new Uri\FakeUri($current)))->reference()
-		);
 	}
 }
 
