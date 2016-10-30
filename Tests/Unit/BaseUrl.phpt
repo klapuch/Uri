@@ -16,7 +16,7 @@ final class BaseUrl extends Tester\TestCase {
 	 * @dataProvider paths
 	 */
 	public function testChoppedPaths($script, $url, $path) {
-		Assert::same($path, (new Uri\BaseUrl($script, $url))->path());
+		Assert::same($path, (new Uri\BaseUrl($script, $url, '', ''))->path());
 	}
 
 	/**
@@ -25,7 +25,67 @@ final class BaseUrl extends Tester\TestCase {
 	public function testChoppedUrls($script, $reference) {
 		Assert::same(
 			$reference,
-			(new Uri\BaseUrl($script, 'doesn\'t matter'))->reference()
+			(new Uri\BaseUrl($script, 'doesn\'t matter', '', ''))->reference()
+		);
+	}
+
+	public function testWithHost() {
+		Assert::same(
+			'localhost/foo/',
+			(new Uri\BaseUrl(
+				'/foo/index.php',
+				'doesn\'t matter',
+				'localhost',
+				''
+			))->reference()
+		);
+	}
+
+	public function testWithoutHost() {
+		Assert::same(
+			'/foo/',
+			(new Uri\BaseUrl(
+				'/foo/index.php',
+				'doesn\'t matter',
+				'',
+				''
+			))->reference()
+		);
+	}
+
+	public function testWithoutHostButWithScheme() {
+		Assert::same(
+			'/foo/',
+			(new Uri\BaseUrl(
+				'/foo/index.php',
+				'doesn\'t matter',
+				'',
+				'http'
+			))->reference()
+		);
+	}
+
+	public function testWithScheme() {
+		Assert::same(
+			'http://localhost/foo/',
+			(new Uri\BaseUrl(
+				'/foo/index.php',
+				'doesn\'t matter',
+				'localhost',
+				'http'
+			))->reference()
+		);
+	}
+
+	public function testSchemeWithExtraCharacters() {
+		Assert::same(
+			'http://localhost/foo/',
+			(new Uri\BaseUrl(
+				'/foo/index.php',
+				'doesn\'t matter',
+				'localhost',
+				'http://'
+			))->reference()
 		);
 	}
 

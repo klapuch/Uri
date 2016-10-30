@@ -7,21 +7,33 @@ namespace Klapuch\Uri;
  */
 final class BaseUrl implements Uri {
 	const DELIMITER = '/';
+	const EMPTY = '';
 	private $script;
 	private $url;
+	private $host;
+	private $scheme;
 
-	public function __construct(string $script, string $url) {
+	public function __construct(
+		string $script,
+		string $url,
+		string $host = self::EMPTY,
+		string $scheme = self::EMPTY
+	) {
 		$this->script = $script;
 		$this->url = $url;
+		$this->host = $host;
+		$this->scheme = $scheme;
 	}
 
 	public function reference(): string {
-		return implode(
-			self::DELIMITER,
-			$this->withoutExecutedScript(
-				explode(self::DELIMITER, $this->script)
-			)
-		) . self::DELIMITER;
+		return $this->toFullyQualified(
+			implode(
+				self::DELIMITER,
+				$this->withoutExecutedScript(
+					explode(self::DELIMITER, $this->script)
+				)
+			) . self::DELIMITER
+		);
 	}
 
 	public function path(): string {
@@ -35,7 +47,7 @@ final class BaseUrl implements Uri {
 				);
 			}
 		}
-		return '';
+		return self::EMPTY;
 	}
 
 	/**
@@ -79,5 +91,12 @@ final class BaseUrl implements Uri {
 	 */
 	private function withoutTrailingSlashes(array $parts): array {
 		return array_filter($parts, 'strlen');
+	}
+
+	private function toFullyQualified(string $base): string {
+		$scheme = $this->scheme && $this->host
+			? preg_replace('~[^a-z]~i', '', $this->scheme) . '://'
+			: self::EMPTY;
+		return $scheme . $this->host . $base;
 	}
 }
