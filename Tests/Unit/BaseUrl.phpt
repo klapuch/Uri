@@ -31,7 +31,7 @@ final class BaseUrl extends Tester\TestCase {
 
 	public function testWithHost() {
 		Assert::same(
-			'localhost/foo',
+			'localhost/foo/',
 			(new Uri\BaseUrl(
 				'/foo/index.php',
 				'doesn\'t matter',
@@ -43,7 +43,7 @@ final class BaseUrl extends Tester\TestCase {
 
 	public function testWithoutHost() {
 		Assert::same(
-			'/foo',
+			'/foo/',
 			(new Uri\BaseUrl(
 				'/foo/index.php',
 				'doesn\'t matter',
@@ -55,7 +55,7 @@ final class BaseUrl extends Tester\TestCase {
 
 	public function testWithoutHostButWithScheme() {
 		Assert::same(
-			'/foo',
+			'/foo/',
 			(new Uri\BaseUrl(
 				'/foo/index.php',
 				'doesn\'t matter',
@@ -67,7 +67,7 @@ final class BaseUrl extends Tester\TestCase {
 
 	public function testWithScheme() {
 		Assert::same(
-			'http://localhost/foo',
+			'http://localhost/foo/',
 			(new Uri\BaseUrl(
 				'/foo/index.php',
 				'doesn\'t matter',
@@ -79,7 +79,7 @@ final class BaseUrl extends Tester\TestCase {
 
 	public function testSchemeWithExtraCharacters() {
 		Assert::same(
-			'http://localhost/foo',
+			'http://localhost/foo/',
 			(new Uri\BaseUrl(
 				'/foo/index.php',
 				'doesn\'t matter',
@@ -92,19 +92,19 @@ final class BaseUrl extends Tester\TestCase {
 	protected function urls() {
 		return [
 			// [scriptUrl, expected]
-			['/foo/www/index.php', '/foo/www'],
-			['/foo/index.php', '/foo'],
-			['/Foo/index.php', '/Foo'],
-			['/foo/categories/bar/www/index.php', '/foo/categories/bar/www'],
-			['/index.php', ''],
-			['/foo/www/index.php', '/foo/www'],
-			['/foo/www/index.php', '/foo/www'],
-			['', ''],
-			['', ''],
-			['/', ''],
-			['/foo/index.php', '/foo'],
-			['index.php', ''],
-			['foo/index.php', 'foo'],
+			['/foo/www/index.php', '/foo/www/'],
+			['/foo/index.php', '/foo/'],
+			['/Foo/index.php', '/Foo/'],
+			['/foo/categories/bar/www/index.php', '/foo/categories/bar/www/'],
+			['/index.php', '/'],
+			['/foo/www/index.php', '/foo/www/'],
+			['/foo/www/index.php', '/foo/www/'],
+			['', '/'],
+			['', '/'],
+			['/', '/'],
+			['/foo/index.php', '/foo/'],
+			['index.php', '/'],
+			['foo/index.php', 'foo/'],
 		];
 	}
 

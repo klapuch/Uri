@@ -32,7 +32,7 @@ final class BaseUrl implements Uri {
 				$this->withoutExecutedScript(
 					explode(self::DELIMITER, $this->script)
 				)
-			)
+			) . self::DELIMITER
 		);
 	}
 
