@@ -2,29 +2,32 @@
   "name": "klapuch/uri",
   "type": "library",
   "description": "Normalized, united, checked and beauty uri",
-  "keywords": [
-    "url",
-    "urn",
-    "uri"
-  ],
   "homepage": "https://github.com/klapuch/Uri",
+  "keywords": [
+	"url",
+	"urn",
+	"uri"
+  ],
   "authors": [
-    {
-      "name": "Dominik Klapuch",
-      "homepage": "http://www.facedown.cz",
-      "role": "Developer"
-    }
+	{
+	  "name": "Dominik Klapuch",
+	  "email": "klapuchdominik@gmail.com",
+	  "homepage": "https://www.github.com/klapuch",
+	  "role": "Developer"
+	}
   ],
   "require": {
-    "php": ">=7.0",
-    "ext-mbstring": "*"
+	"php": ">=7.0",
+	"ext-mbstring": "*"
   },
   "require-dev": {
-    "nette/tester": "^1.7"
+	"nette/tester": "^1.7"
   },
   "autoload": {
-    "psr-4": {
-      "Klapuch\\Uri\\": "Core/"
-    }
+	"psr-4": {
+	  "Klapuch\\Uri\\": [
+		"Core/"
+	  ]
+	}
   }
 }
