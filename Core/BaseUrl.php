@@ -38,12 +38,12 @@ final class BaseUrl implements Uri {
 
 	public function path(): string {
 		$scriptParts = $this->toParts($this->script);
-		$urlParts = $this->toParts($this->url);
+		$urlParts = $this->toParts(parse_url($this->url, PHP_URL_PATH));
 		for($i = 0; $i < count($scriptParts); $i++) {
 			if($scriptParts[$i] !== $urlParts[$i]) {
 				return implode(
 					self::DELIMITER,
-					$this->withoutQueries(array_slice($urlParts, $i))
+					$this->withoutTrailingSlashes(array_slice($urlParts, $i))
 				);
 			}
 		}
@@ -67,21 +67,6 @@ final class BaseUrl implements Uri {
 	 */
 	private function toParts(string $url): array {
 		return explode(self::DELIMITER, mb_strtolower($url));
-	}
-
-	/**
-	 * All the parts without queries
-	 * @param array $parts
-	 * @return array
-	 */
-	private function withoutQueries(array $parts): array {
-		return $this->withoutTrailingSlashes(
-			array_map(function(string $part): string {
-				if(strpos($part, '?') === false)
-					return $part;
-				return substr($part, 0, strpos($part, '?'));
-			}, $parts)
-		);
 	}
 
 	/**
