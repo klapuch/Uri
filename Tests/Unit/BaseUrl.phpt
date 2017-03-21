@@ -98,12 +98,8 @@ final class BaseUrl extends Tester\TestCase {
 			['/foo/categories/bar/www/index.php', '/foo/categories/bar/www'],
 			['/foo/www/index.php', '/foo/www'],
 			['/foo/www/index.php', '/foo/www'],
-			['', ''],
-			['/', ''],
 			['/foo/index.php', '/foo'],
 			['/index.php', ''],
-			['index.php', ''],
-			['foo/index.php', 'foo'],
 		];
 	}
 
