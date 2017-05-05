@@ -6,8 +6,8 @@ namespace Klapuch\Uri;
  * URL which is always reachable
  */
 final class ReachableUrl implements Uri {
-	const STATUS = 0;
-	const NOT_FOUND = 404;
+	private const STATUS = 0;
+	private const NOT_FOUND = 404;
 	private $origin;
 
 	public function __construct(Uri $origin) {
@@ -15,7 +15,7 @@ final class ReachableUrl implements Uri {
 	}
 
 	public function reference(): string {
-		if($this->reachable())
+		if ($this->reachable())
 			return $this->origin->reference();
 		throw new \InvalidArgumentException(
 			sprintf(

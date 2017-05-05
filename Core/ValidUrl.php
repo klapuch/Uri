@@ -13,11 +13,11 @@ final class ValidUrl implements Uri {
 	}
 
 	public function path(): string {
-		return rtrim((string)parse_url($this->reference(), PHP_URL_PATH), '/');
+		return rtrim((string) parse_url($this->reference(), PHP_URL_PATH), '/');
 	}
 
 	public function reference(): string {
-		if($this->valid())
+		if ($this->valid())
 			return $this->url;
 		throw new \InvalidArgumentException(
 			sprintf('The given URL "%s" is not valid', $this->url)
@@ -29,6 +29,6 @@ final class ValidUrl implements Uri {
 	 * @return bool
 	 */
 	private function valid(): bool {
-		return (bool)filter_var($this->url, FILTER_VALIDATE_URL);
+		return (bool) filter_var($this->url, FILTER_VALIDATE_URL);
 	}
 }

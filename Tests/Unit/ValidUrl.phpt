@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * @testCase
  * @phpVersion > 7.0.0
@@ -28,7 +29,7 @@ final class ValidUrl extends Tester\TestCase {
 				(new Uri\ValidUrl($url))->reference();
 			},
 			\InvalidArgumentException::class,
-			"The given URL \"$url\" is not valid"
+			sprintf('The given URL "%s" is not valid', $url)
 		);
 	}
 

@@ -16,7 +16,7 @@ final class SchemeFoistedUrl implements Uri {
 
 	public function reference(): string {
 		$scheme = parse_url($this->origin->reference(), PHP_URL_SCHEME);
-		if($scheme)
+		if ($scheme)
 			return $this->origin->reference();
 		return sprintf('%s://%s', $this->scheme, $this->origin->reference());
 	}

@@ -16,7 +16,7 @@ final class SchemeForcedUrl implements Uri {
 
 	public function reference(): string {
 		$scheme = parse_url($this->origin->reference(), PHP_URL_SCHEME);
-		if(in_array(strtolower((string)$scheme), $this->schemes))
+		if (in_array(strtolower((string) $scheme), $this->schemes))
 			return $this->origin->reference();
 		throw new \InvalidArgumentException(
 			sprintf(
@@ -38,7 +38,7 @@ final class SchemeForcedUrl implements Uri {
 	private function toReadableSchemes(array $schemes): string {
 		$emptyPhrase = ' or left empty';
 		$phrase = implode(', ', array_filter($schemes));
-		if($schemes === array_filter($schemes))
+		if ($schemes === array_filter($schemes))
 			return $phrase;
 		return $phrase . $emptyPhrase;
 	}

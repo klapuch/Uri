@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 /**
  * @testCase
  * @phpVersion > 7.0.0
@@ -31,7 +32,7 @@ final class ReachableUrl extends Tester\TestCase {
 				(new Uri\ReachableUrl(new Uri\FakeUri($url)))->reference();
 			},
 			\InvalidArgumentException::class,
-			"The given URL \"$url\" does not exist"
+			sprintf('The given URL "%s" does not exist', $url)
 		);
 	}
 

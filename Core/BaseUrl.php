@@ -6,8 +6,8 @@ namespace Klapuch\Uri;
  * Base URL considered as a root URL for project
  */
 final class BaseUrl implements Uri {
-	const DELIMITER = '/';
-	const EMPTY = '';
+	private const DELIMITER = '/';
+	private const EMPTY = '';
 	private $script;
 	private $url;
 	private $host;
@@ -39,8 +39,8 @@ final class BaseUrl implements Uri {
 	public function path(): string {
 		$scriptParts = $this->toParts($this->script);
 		$urlParts = $this->toParts(parse_url($this->url, PHP_URL_PATH));
-		for($i = 0; $i < count($scriptParts); $i++) {
-			if($scriptParts[$i] !== $urlParts[$i]) {
+		for ($i = 0; $i < count($scriptParts); $i++) {
+			if ($scriptParts[$i] !== $urlParts[$i]) {
 				return implode(
 					self::DELIMITER,
 					$this->withoutTrailingSlashes(array_slice($urlParts, $i))
