@@ -27,12 +27,20 @@
     "sebastian/phpcpd": "^3.0",
     "phing/phing": "^2.16",
     "consistence/coding-standard": "^1.0",
-    "phpstan/phpstan": "^0.7.0"
+    "phpstan/phpstan": "^0.7.0",
+    "mockery/mockery": "^0.9.9"
   },
   "autoload": {
     "psr-4": {
       "Klapuch\\Uri\\": [
         "Core/"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Klapuch\\Uri\\": [
+        "Tests/"
       ]
     }
   }
