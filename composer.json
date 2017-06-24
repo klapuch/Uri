@@ -4,24 +4,24 @@
   "description": "Normalized, united, checked and beauty uri",
   "homepage": "https://github.com/klapuch/Uri",
   "keywords": [
-	"url",
-	"urn",
-	"uri"
+    "url",
+    "urn",
+    "uri"
   ],
   "authors": [
-	{
-	  "name": "Dominik Klapuch",
-	  "email": "klapuchdominik@gmail.com",
-	  "homepage": "https://www.github.com/klapuch",
-	  "role": "Developer"
-	}
+    {
+      "name": "Dominik Klapuch",
+      "email": "klapuchdominik@gmail.com",
+      "homepage": "https://www.github.com/klapuch",
+      "role": "Developer"
+    }
   ],
   "require": {
-	"php": ">=7.1",
-	"ext-mbstring": "*"
+    "php": ">=7.1",
+    "ext-mbstring": "*"
   },
   "require-dev": {
-	"nette/tester": "^1.7",
+    "nette/tester": "^1.7",
     "jakub-onderka/php-parallel-lint": "^0.9.2",
     "slevomat/coding-standard": "^2.3",
     "sebastian/phpcpd": "^3.0",
@@ -30,10 +30,10 @@
     "phpstan/phpstan": "^0.7.0"
   },
   "autoload": {
-	"psr-4": {
-	  "Klapuch\\Uri\\": [
-		"Core/"
-	  ]
-	}
+    "psr-4": {
+      "Klapuch\\Uri\\": [
+        "Core/"
+      ]
+    }
   }
 }
