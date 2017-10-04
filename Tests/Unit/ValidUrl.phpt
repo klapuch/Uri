@@ -50,6 +50,17 @@ final class ValidUrl extends Tester\TestCase {
 		);
 	}
 
+	public function testExtractingQuery() {
+		Assert::same(
+			['name' => 'Dom', 'age' => '21'],
+			(new Uri\ValidUrl('https://www.google.com/?name=Dom&age=21'))->query()
+		);
+	}
+
+	public function testNoQueryLeadingToEmptyArray() {
+		Assert::same([], (new Uri\ValidUrl('https://www.google.com'))->query());
+	}
+
 	protected function validReferences() {
 		return [
 			['http://www.google.com'],

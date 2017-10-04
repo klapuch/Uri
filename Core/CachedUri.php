@@ -9,6 +9,7 @@ final class CachedUri implements Uri {
 	private $origin;
 	private $reference;
 	private $path;
+	private $query;
 
 	public function __construct(Uri $origin) {
 		$this->origin = $origin;
@@ -24,5 +25,11 @@ final class CachedUri implements Uri {
 		if ($this->path === null)
 			$this->path = $this->origin->path();
 		return $this->path;
+	}
+
+	public function query(): array {
+		if ($this->query === null)
+			$this->query = $this->origin->query();
+		return $this->query;
 	}
 }

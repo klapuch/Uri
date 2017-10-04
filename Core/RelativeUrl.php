@@ -22,4 +22,8 @@ final class RelativeUrl implements Uri {
 	public function path(): string {
 		return trim($this->path, self::DELIMITER);
 	}
+
+	public function query(): array {
+		return $this->origin->query();
+	}
 }

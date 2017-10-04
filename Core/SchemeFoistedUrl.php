@@ -24,4 +24,8 @@ final class SchemeFoistedUrl implements Uri {
 	public function path(): string {
 		return $this->origin->path();
 	}
+
+	public function query(): array {
+		return $this->origin->query();
+	}
 }

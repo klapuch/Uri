@@ -30,6 +30,10 @@ final class SchemeForcedUrl implements Uri {
 		return $this->origin->path();
 	}
 
+	public function query(): array {
+		return $this->origin->query();
+	}
+
 	/**
 	 * Schemes transferred to human readable form
 	 * @param array $schemes
