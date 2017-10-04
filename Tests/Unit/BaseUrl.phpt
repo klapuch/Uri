@@ -66,6 +66,30 @@ final class BaseUrl extends Tester\TestCase {
 		);
 	}
 
+	public function testExtractingQuery() {
+		Assert::same(
+			['name' => 'Dom', 'age' => '21'],
+			(new Uri\BaseUrl(
+				'/Acme/www/index.php',
+				'/Acme/www/a/b/c/?name=Dom&age=21',
+				'localhost',
+				'https'
+			))->query()
+		);
+	}
+
+	public function testNoQueryLeadingToEmptyArray() {
+		Assert::same(
+			[],
+			(new Uri\BaseUrl(
+				'/Acme/www/index.php',
+				'/Acme/www/a/b/c',
+				'localhost',
+				'https'
+			))->query()
+		);
+	}
+
 	public function testWithScheme() {
 		Assert::same(
 			'http://localhost/foo',

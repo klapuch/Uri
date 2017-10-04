@@ -31,6 +31,14 @@ final class CachedUri extends Tester\TestCase {
 		Assert::same('/home', $uri->path());
 		Assert::same('/home', $uri->path());
 	}
+
+	public function testCallingQueryJustOnce() {
+		$origin = $this->mock(Uri\Uri::class);
+		$origin->shouldReceive('query')->once()->andReturn(['abc']);
+		$uri = new Uri\CachedUri($origin);
+		Assert::same(['abc'], $uri->query());
+		Assert::same(['abc'], $uri->query());
+	}
 }
 
 (new CachedUri())->run();

@@ -26,13 +26,15 @@ final class BaseUrl implements Uri {
 	}
 
 	public function reference(): string {
-		return $this->toFullyQualified(
+		return $this->absolute(
 			implode(
 				self::DELIMITER,
 				$this->withoutExecutedScript(
 					explode(self::DELIMITER, $this->script)
 				)
-			)
+			),
+			$this->scheme,
+			$this->host
 		);
 	}
 
@@ -48,6 +50,12 @@ final class BaseUrl implements Uri {
 			}
 		}
 		return self::EMPTY;
+	}
+
+	public function query(): array {
+		return (new ValidUrl(
+			$this->absolute($this->url, $this->scheme, $this->host)
+		))->query();
 	}
 
 	/**
@@ -78,10 +86,10 @@ final class BaseUrl implements Uri {
 		return array_filter($parts, 'strlen');
 	}
 
-	private function toFullyQualified(string $base): string {
-		$scheme = $this->scheme && $this->host
-			? preg_replace('~[^a-z]~i', '', $this->scheme) . '://'
+	private function absolute(string $base, string $scheme, string $host): string {
+		$scheme = $scheme && $host
+			? preg_replace('~[^a-z]~i', '', $scheme) . '://'
 			: self::EMPTY;
-		return $scheme . $this->host . $base;
+		return $scheme . $host . $base;
 	}
 }

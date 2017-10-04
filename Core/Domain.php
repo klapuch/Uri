@@ -22,4 +22,8 @@ final class Domain implements Uri {
 		$host = parse_url($url, PHP_URL_HOST);
 		return $scheme . '://' . $host;
 	}
+
+	public function query(): array {
+		return $this->origin->query();
+	}
 }

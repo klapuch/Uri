@@ -24,6 +24,11 @@ final class ValidUrl implements Uri {
 		);
 	}
 
+	public function query(): array {
+		parse_str((string) parse_url($this->reference(), PHP_URL_QUERY), $query);
+		return $query;
+	}
+
 	/**
 	 * Is the given url valid?
 	 * @return bool

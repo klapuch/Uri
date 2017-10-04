@@ -16,4 +16,11 @@ interface Uri {
 	 * @return string
 	 */
 	public function reference(): string;
+
+	/**
+	 * Query parameters from URI
+	 * @throws \InvalidArgumentException
+	 * @return array
+	 */
+	public function query(): array;
 }
