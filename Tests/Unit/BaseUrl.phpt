@@ -138,9 +138,7 @@ final class BaseUrl extends Tester\TestCase {
 			['/Ac/2/Me/www/index.php', '/Ac/2/Me/www/a/b/c', 'a/b/c'],
 			['/index.php', '/a/b/c', 'a/b/c'],
 			['/Acme/www/index.php', '/Acme/www/registration', 'registration'],
-			['/Acme/www/index.php', '/acme/www/page/view', 'page/view'], // case sensitive bug
-			['/acme/www/index.php', '/Acme/www/page/view', 'page/view'], // case sensitive bug
-			['/čcme/www/index.php', '/Čcme/www/page/view', 'page/view'], // multi byte char
+			['/acme/www/index.php', '/acme/www/page/view', 'page/view'],
 			['/acme/www/index.php', '/acme/www/page/view/?get=someValue', 'page/view'],
 			['/acme/www/index.php', '/acme/www/page/?get=someValue', 'page'],
 			['/acme/www/index.php', '/acme/www/page/view?get=someValue', 'page/view'],

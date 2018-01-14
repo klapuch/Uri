@@ -74,7 +74,7 @@ final class BaseUrl implements Uri {
 	 * @return array
 	 */
 	private function toParts(string $url): array {
-		return explode(self::DELIMITER, mb_strtolower($url));
+		return explode(self::DELIMITER, $url);
 	}
 
 	/**
